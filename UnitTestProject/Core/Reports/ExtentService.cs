@@ -24,7 +24,7 @@ namespace XUnitTestProject1.Core.Reports
             var currentDirectory = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory);
             string projectDirectory = currentDirectory.Parent.Parent.Parent.FullName;
 
-            var reporter = new ExtentV3HtmlReporter(projectDirectory + "\\3Extent.html");
+            var reporter = new ExtentV3HtmlReporter(projectDirectory + "\\report" + "\\3Extent.html");
                 reporter.Config.Theme = Theme.Dark;
                 reporter.Config.DocumentTitle = "Extent/nUnit Samples";
                 reporter.Config.ReportName = "Extent/nUnit Samples";
