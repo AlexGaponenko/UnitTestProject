@@ -24,7 +24,7 @@ namespace NUnitTestProject1
         private string _userId = "3078328";
         private string _loginNotRight = "VitalMartal@mail.ru";
         private string _passwordNotRight = "12345678";
-        private string _messegeWrongLoginOrPassword = "Неверный логин или пароль";
+        private string _messegeWrongLoginOrPassword = "РќРµРІРµСЂРЅС‹Р№ Р»РѕРіРёРЅ РёР»Рё РїР°СЂРѕР»СЊ";
         [OneTimeSetUp]
         public void Setup()
         {
