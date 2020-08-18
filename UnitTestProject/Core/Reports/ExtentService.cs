@@ -28,7 +28,6 @@ namespace XUnitTestProject1.Core.Reports
                 reporter.Config.Theme = Theme.Dark;
                 reporter.Config.DocumentTitle = "Extent/nUnit Samples";
                 reporter.Config.ReportName = "Extent/nUnit Samples";
-            
                 Instance.AttachReporter(reporter);
             }
 
