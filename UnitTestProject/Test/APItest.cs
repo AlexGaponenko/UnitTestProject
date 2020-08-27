@@ -52,20 +52,21 @@ namespace UnitTestProject.Test
             var restUrlPlanet = restAPI.SetUrlHttp(Convert.ToString(response));
             var requestPlanet = restAPI.CreateGetRequest();
             var responsePlanet = restAPI.ObjectParseOne(restUrlPlanet, requestPlanet, "name");
-            //var actualStatusCode = restAPI.GetStatusCode(response);
-            //Assert.AreEqual(actualStatusCode, correctStatusCode);
+            var responseStatus = restAPI.GetResponse(restUrlPlanet, requestPlanet);
+            var actualStatusCode = restAPI.GetStatusCode(responseStatus);
+            Assert.AreEqual(actualStatusCode, correctStatusCode);
             Assert.AreEqual("Tatooine", Convert.ToString(responsePlanet));
             
         }
            
-              [Test]
-              public void Test3()
-              {
-                  var restUrl = restAPI.SetUrl(filmsUrl);
-                  var request = restAPI.CreateGetRequest();
-                  var response = restAPI.ObjectParse(restUrl, request, "results", "title"); 
-                  Assert.AreEqual(firstFilms, Convert.ToString(response));
-              }
+        [Test]
+        public void Test3()
+        {
+            var restUrl = restAPI.SetUrl(filmsUrl);
+            var request = restAPI.CreateGetRequest();
+            var response = restAPI.ObjectParse(restUrl, request, "results", "title"); 
+            Assert.AreEqual(firstFilms, Convert.ToString(response));
+        }
   
         [Test]
         public void Test4()
