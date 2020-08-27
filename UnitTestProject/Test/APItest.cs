@@ -26,7 +26,7 @@ namespace UnitTestProject.Test
         public string planetUrl = "planets/";
         public string filmsUrl = "films/";
         public string firstFilms = "A New Hope";
-        public string urlAppCentrApi = "https://openapi.appcenter.ms/#:";
+        public string urlAppCentrApi = "https://api.appcenter.ms/v0.1/user/metadata/optimizely";
         public string urlWithToken = "https://api.appcenter.ms/v0.1/user/invitations/orgs/js2kgp/accept";
         public string tokenApp = "js2kgp";
         public int correctStatusCode = 200;
@@ -70,18 +70,18 @@ namespace UnitTestProject.Test
         [Test]
         public void Test4()
         {
-            var apiUrl = restAPI.SetUrl(urlAppCentrApi);
+            var apiUrl = restAPI.SetUrlHttp(urlAppCentrApi);
             var request = restAPI.CreateGetRequestToken(tokenApp);
             var response = restAPI.GetResponse(apiUrl, request);
             var actualStatusCode = restAPI.GetStatusCode(response);
-            Assert.AreEqual(actualStatusCode, correctStatusCode);
+            Assert.AreEqual(actualStatusCode, correctStatusCodeApp);
         }
 
 
          [Test]
          public void Test5()
          {
-             var apiUrl = restAPI.SetUrl(urlWithToken);
+             var apiUrl = restAPI.SetUrlHttp(urlWithToken);
              var request = restAPI.CreatePostRequestToken();
              var response = restAPI.GetResponse(apiUrl, request);
              var actualStatusCode = restAPI.GetStatusCode(response);

@@ -53,7 +53,8 @@ namespace UnitTestProject.Core.RestHelper
                 RestRequest restRequest = new RestRequest(Method.GET);
                 restRequest.AddHeader("cache-control", "no-cache");
                 restRequest.AddHeader("content-type", "application/json");
-                restRequest.AddHeader("Authorization", token);
+ //               restRequest.AddHeader("content-type", "charset=utf-8");
+                //               restRequest.AddHeader("Authorization", token);
                 return restRequest;
             }
 
