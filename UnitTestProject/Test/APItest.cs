@@ -34,7 +34,7 @@ namespace UnitTestProject.Test
         public int planetsCount = 60;
 
         [Test]
-        public void Test()
+        public void TestAPI()
         {
 
             var restUrl = restAPI.SetUrl(planetUrl);
@@ -44,12 +44,12 @@ namespace UnitTestProject.Test
         }
 
         [Test]
-        public void Test2()
+        public void TestAPI2()
         {
             var restUrl = restAPI.SetUrl(planetUrl);
             var request = restAPI.CreateGetRequest();
             var response = restAPI.ObjectParse(restUrl, request, "results", "url");
-            var restUrlPlanet = restAPI.SetUrlHttp(Convert.ToString(response));
+            var restUrlPlanet = restAPI.SetUrl(Convert.ToString(response));
             var requestPlanet = restAPI.CreateGetRequest();
             var responsePlanet = restAPI.ObjectParseOne(restUrlPlanet, requestPlanet, "name");
             var responseStatus = restAPI.GetResponse(restUrlPlanet, requestPlanet);
@@ -60,7 +60,7 @@ namespace UnitTestProject.Test
         }
            
         [Test]
-        public void Test3()
+        public void TestAPI3()
         {
             var restUrl = restAPI.SetUrl(filmsUrl);
             var request = restAPI.CreateGetRequest();
@@ -69,9 +69,9 @@ namespace UnitTestProject.Test
         }
   
         [Test]
-        public void Test4()
+        public void TestAPI4()
         {
-            var apiUrl = restAPI.SetUrlHttp(urlAppCentrApi);
+            var apiUrl = restAPI.SetUrl(urlAppCentrApi);
             var request = restAPI.CreateGetRequestToken(tokenApp);
             var response = restAPI.GetResponse(apiUrl, request);
             var actualStatusCode = restAPI.GetStatusCode(response);
@@ -80,9 +80,9 @@ namespace UnitTestProject.Test
 
 
          [Test]
-         public void Test5()
+         public void TestAPI5()
          {
-             var apiUrl = restAPI.SetUrlHttp(urlWithToken);
+             var apiUrl = restAPI.SetUrl(urlWithToken);
              var request = restAPI.CreatePostRequestToken();
              var response = restAPI.GetResponse(apiUrl, request);
              var actualStatusCode = restAPI.GetStatusCode(response);

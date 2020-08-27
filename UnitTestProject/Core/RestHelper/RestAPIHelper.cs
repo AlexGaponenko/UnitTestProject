@@ -26,18 +26,19 @@ namespace UnitTestProject.Core.RestHelper
             public string baseUrl = "https://swapi.dev/api/";
 
 
-
             internal RestClient SetUrl(string endpoint)
             {
+                if ((endpoint.IndexOf("http")) == 0)
+                {
+                    var restClient = new RestClient(endpoint);
+                    return restClient;
+                }
+                else
+                {
                     string url = Path.Combine(baseUrl, endpoint);
                     var restClient = new RestClient(url);
                     return restClient;
-            }
-
-            internal RestClient SetUrlHttp(string endpoint)
-            {
-                var restClient = new RestClient(endpoint);
-                return restClient;
+                }
             }
 
             public RestRequest CreateGetRequest()
@@ -69,11 +70,11 @@ namespace UnitTestProject.Core.RestHelper
                 //restRequest.AddHeader("Authorization", "js2kgp");
                 return restRequest;
             }
-            public dynamic ObjectParse(RestClient client, RestRequest request, string name, string url)
+            public dynamic ObjectParse(RestClient client, RestRequest request, string name, string param)
             {
                 var response = client.Execute(request);
                 JObject output = JObject.Parse(response.Content);
-                dynamic arg = output[name][0][url];
+                dynamic arg = output[name][0][param];
                 return arg;
             }
 
