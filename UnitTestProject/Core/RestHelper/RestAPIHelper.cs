@@ -10,6 +10,8 @@ using System.Web.UI.WebControls;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Net;
+using RestSharp.Serialization.Json;
+using Microsoft.Extensions.Primitives;
 
 namespace UnitTestProject.Core.RestHelper
 {
@@ -27,18 +29,15 @@ namespace UnitTestProject.Core.RestHelper
 
             internal RestClient SetUrl(string endpoint)
             {
-                if (!endpoint.StartsWith("h"))
-                {
                     string url = Path.Combine(baseUrl, endpoint);
                     var restClient = new RestClient(url);
                     return restClient;
-                }
-                else
-                {
-                    var restClient = new RestClient(endpoint);
-                    return restClient;
-                }
-   
+            }
+
+            internal RestClient SetUrlHttp(string endpoint)
+            {
+                var restClient = new RestClient(endpoint);
+                return restClient;
             }
 
             public RestRequest CreateGetRequest()
@@ -49,9 +48,44 @@ namespace UnitTestProject.Core.RestHelper
                 return restRequest;
             }
 
-            public IRestResponse GetResponse(RestClient client, RestRequest request)
+            public RestRequest CreateGetRequestToken(string token)
             {
-                return client.Execute(request);
+                RestRequest restRequest = new RestRequest(Method.GET);
+                restRequest.AddHeader("cache-control", "no-cache");
+                restRequest.AddHeader("content-type", "application/json");
+                restRequest.AddHeader("Authorization", token);
+                return restRequest;
+            }
+
+            internal object SetUrlHttp(object p)
+            {
+                throw new NotImplementedException();
+            }
+
+            public RestRequest CreatePostRequestToken()
+            {
+                RestRequest restRequest = new RestRequest(Method.POST);
+                restRequest.AddHeader("cache-control", "no-cache");
+                restRequest.AddHeader("content-type", "application/json");
+                //restRequest.AddHeader("accept", "application/json");
+                //restRequest.AddHeader("X-API-Token", "js2kgp");
+                //restRequest.AddHeader("Authorization", "js2kgp");
+                return restRequest;
+            }
+            public dynamic ObjectParse(RestClient client, RestRequest request, string name, string url)
+            {
+                var response = client.Execute(request);
+                JObject output = JObject.Parse(response.Content);
+                dynamic arg = output[name][0][url];
+                return arg;
+            }
+
+            public dynamic ObjectParseOne(RestClient client, RestRequest request, string name)
+            {
+                var response = client.Execute(request);
+                JObject output = JObject.Parse(response.Content);
+                dynamic arg = output[name];
+                return arg;
             }
 
             public dynamic DeSeriolizeObj(IRestResponse response)
@@ -61,12 +95,6 @@ namespace UnitTestProject.Core.RestHelper
                 return vol;
             }
 
-            //public string GetUrlPlanet(IRestResponse response)
-            //{
-            //    dynamic vol = restAPI.DeSeriolizeObj(response);
-            //    string urlPlanet = vol.results[0].url;
-            //    return urlPlanet;
-            //}
 
             public int GetStatusCode(IRestResponse response)
             {
@@ -74,7 +102,11 @@ namespace UnitTestProject.Core.RestHelper
                 int numericStatusCode = (int)statusCode;
                 return numericStatusCode;
             }
-
+            public dynamic GetResponse(RestClient client, RestRequest request)
+            {
+                var response = client.Execute(request);
+                return response;
+            }
         }
 
     }
