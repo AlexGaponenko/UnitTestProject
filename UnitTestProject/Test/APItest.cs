@@ -15,10 +15,11 @@ using System.Diagnostics;
 using System.Web.Configuration;
 using System.Net;
 using RestSharp.Serialization.Json;
+using NUnitTestProject1.Test;
 
 namespace UnitTestProject.Test
 {
-    class APItest
+    class APItest : ExtentSetUpFixture
     {
 
         APIHelper restAPI = new APIHelper();
@@ -30,7 +31,7 @@ namespace UnitTestProject.Test
         public string urlWithToken = "https://api.appcenter.ms/v0.1/user/invitations/orgs/js2kgp/accept";
         public string tokenApp = "js2kgp";
         public int correctStatusCode = 200;
-        public int correctStatusCodeApp = 401;
+        public int correctStatusCodeApp = 404;
         public int planetsCount = 60;
 
         [Test]
