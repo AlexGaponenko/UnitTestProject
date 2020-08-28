@@ -31,7 +31,7 @@ namespace UnitTestProject.Test
         public string urlWithToken = "https://api.appcenter.ms/v0.1/user/invitations/orgs/js2kgp/accept";
         public string tokenApp = "js2kgp";
         public int correctStatusCode = 200;
-        public int correctStatusCodeApp = 404;
+        public int correctStatusCodeApp = 401;
         public int planetsCount = 60;
 
         [Test]
@@ -90,32 +90,32 @@ namespace UnitTestProject.Test
              Assert.AreEqual(actualStatusCode, correctStatusCodeApp);
 
          }
-/*
-            [Test]
-            public void HardCoding()
-            {
-                RestClient client = new RestClient("https://swapi.dev/api/planets");
-                RestRequest request = new RestRequest(Method.GET);
-                request.AddHeader("cache-control", "no-cache");
-                request.AddHeader("content-type", "application/json");
-                var response = client.Execute(request);
-                var deserialize = new JsonDeserializer();
-                var output = deserialize.Deserialize<Dictionary<string, string>>(response);
-                var result = output["count"];
-                Assert.AreEqual(int.Parse(result), planetsCount);
-            }
+        /*
+                    [Test]
+                    public void HardCoding()
+                    {
+                        RestClient client = new RestClient("https://swapi.dev/api/planets");
+                        RestRequest request = new RestRequest(Method.GET);
+                        request.AddHeader("cache-control", "no-cache");
+                        request.AddHeader("content-type", "application/json");
+                        var response = client.Execute(request);
+                        var deserialize = new JsonDeserializer();
+                        var output = deserialize.Deserialize<Dictionary<string, string>>(response);
+                        var result = output["count"];
+                        Assert.AreEqual(int.Parse(result), planetsCount);
+                    }
 
-            [Test]
+                            [Test]
 
-            public void HardCodingHTTPie()
-            {
-                RestClient client = new RestClient("https://swapi.dev/api/planets/1");
-                RestRequest request = new RestRequest(Method.GET);
-                request.AddHeader("cache-control", "no-cache");
-                request.AddHeader("content-type", "application/json");
-                IRestResponse response = client.Execute(request);
-                HttpStatusCode statusCode = response.StatusCode;
-                int numericStatusCode = (int)statusCode;
-            }*/
+                            public void HardCodingHTTPie()
+                            {
+                                RestClient client = new RestClient("https://swapi.dev/api/planets/1");
+                                RestRequest request = new RestRequest(Method.GET);
+                                request.AddHeader("cache-control", "no-cache");
+                                request.AddHeader("content-type", "application/json");
+                                IRestResponse response = client.Execute(request);
+                                HttpStatusCode statusCode = response.StatusCode;
+                                int numericStatusCode = (int)statusCode;
+                            }*/
     }
 }
