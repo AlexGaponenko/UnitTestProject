@@ -1,21 +1,9 @@
-﻿using MongoDB.Bson.IO;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using RestSharp;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnitTestProject.Core.RestHelper;
-using UnitTestProject.PageObject;
 using static UnitTestProject.Core.RestHelper.RestAPIHelper;
-using Newtonsoft.Json;
-using RestSharp.Extensions;
-using System.Diagnostics;
-using System.Web.Configuration;
-using System.Net;
-using RestSharp.Serialization.Json;
 using NUnitTestProject1.Test;
+using Newtonsoft.Json.Linq;
 
 namespace UnitTestProject.Test
 {
@@ -24,98 +12,54 @@ namespace UnitTestProject.Test
 
         APIHelper restAPI = new APIHelper();
 
-        public string planetUrl = "planets/";
-        public string filmsUrl = "films/";
-        public string firstFilms = "A New Hope";
-        public string urlAppCentrApi = "https://api.appcenter.ms/v0.1/user/metadata/optimizely";
-        public string urlWithToken = "https://api.appcenter.ms/v0.1/user/invitations/orgs/js2kgp/accept";
-        public string tokenApp = "js2kgp";
-        public int correctStatusCode = 200;
-        public int correctStatusCodeApp = 401;
-        public int planetsCount = 60;
+        protected readonly string planetUrl = "planets/";
+        protected readonly string filmsUrl = "films/";
+        protected readonly string firstFilms = "A New Hope";
+        protected readonly string urlAppCentrApi = "https://api.appcenter.ms/v0.1/user/metadata/optimizely";
+        protected readonly string tokenApp = "js2kgp";
+        protected readonly int correctStatusCode = 200;
+        protected readonly int correctStatusCodeApp = 401;
+        protected readonly int planetsCount = 60;
+
 
         [Test]
-        public void TestAPI()
+        public void TestAPI0()
         {
-
-            var restUrl = restAPI.SetUrl(planetUrl);
-            var request = restAPI.CreateGetRequest();
-            var response = restAPI.ObjectParseOne(restUrl, request, "count");
-            Assert.AreEqual((int)response, planetsCount);
+            IRestResponse response = restAPI.GetReesponse(planetUrl);
+            JObject parsRequest = restAPI.GetObj(response);
+            int countPlanet = Convert.ToInt32(parsRequest["count"]);
+            Assert.AreEqual(planetsCount, countPlanet);
         }
-
-        [Test]
-        public void TestAPI2()
+        [Test, Order(2)]
+        public void TestAPI1()
         {
-            var restUrl = restAPI.SetUrl(planetUrl);
-            var request = restAPI.CreateGetRequest();
-            var response = restAPI.ObjectParse(restUrl, request, "results", "url");
-            var restUrlPlanet = restAPI.SetUrl(Convert.ToString(response));
-            var requestPlanet = restAPI.CreateGetRequest();
-            var responsePlanet = restAPI.ObjectParseOne(restUrlPlanet, requestPlanet, "name");
-            var responseStatus = restAPI.GetResponse(restUrlPlanet, requestPlanet);
-            var actualStatusCode = restAPI.GetStatusCode(responseStatus);
-            Assert.AreEqual(actualStatusCode, correctStatusCode);
-            Assert.AreEqual("Tatooine", Convert.ToString(responsePlanet));
-            
+            IRestResponse response = restAPI.GetReesponse(planetUrl);
+            JObject parsRequest = restAPI.GetObj(response);
+            string urlFirstPlanet = Convert.ToString(parsRequest["results"][0]["url"]);
+            IRestResponse responseFirstPlanet = restAPI.GetReesponse(urlFirstPlanet);
+            JObject parsRequestFirstPlanet = restAPI.GetObj(responseFirstPlanet);
+            string nameFirstPlanet = Convert.ToString(parsRequestFirstPlanet["name"]);
+            int actualStatusCode = restAPI.GetStatusCode(responseFirstPlanet);
+            Assert.AreEqual(correctStatusCode, actualStatusCode);
+            Assert.AreEqual("Tatooine", nameFirstPlanet);
         }
            
-        [Test]
-        public void TestAPI3()
+        [Test, Order(3)]
+        public void TestAPI2()
         {
-            var restUrl = restAPI.SetUrl(filmsUrl);
-            var request = restAPI.CreateGetRequest();
-            var response = restAPI.ObjectParse(restUrl, request, "results", "title"); 
-            Assert.AreEqual(firstFilms, Convert.ToString(response));
+            IRestResponse response = restAPI.GetReesponse(filmsUrl);
+            JObject parsRequest = restAPI.GetObj(response);
+            string firsPilm = Convert.ToString(parsRequest["results"][0]["title"]);
+            Assert.AreEqual(firstFilms, firsPilm);
         }
   
-        [Test]
+        [Test, Order(4)]
         public void TestAPI4()
         {
-            var apiUrl = restAPI.SetUrl(urlAppCentrApi);
-            var request = restAPI.CreateGetRequestToken(tokenApp);
-            var response = restAPI.GetResponse(apiUrl, request);
-            var actualStatusCode = restAPI.GetStatusCode(response);
-            Assert.AreEqual(actualStatusCode, correctStatusCodeApp);
+            IRestResponse response = restAPI.GetReesponse(urlAppCentrApi);
+            int actualStatusCode = restAPI.GetStatusCode(response);
+            Assert.AreEqual(correctStatusCodeApp, actualStatusCode);
         }
 
-
-         [Test]
-         public void TestAPI5()
-         {
-             var apiUrl = restAPI.SetUrl(urlWithToken);
-             var request = restAPI.CreatePostRequestToken();
-             var response = restAPI.GetResponse(apiUrl, request);
-             var actualStatusCode = restAPI.GetStatusCode(response);
-             Assert.AreEqual(actualStatusCode, correctStatusCodeApp);
-
-         }
-        /*
-                    [Test]
-                    public void HardCoding()
-                    {
-                        RestClient client = new RestClient("https://swapi.dev/api/planets");
-                        RestRequest request = new RestRequest(Method.GET);
-                        request.AddHeader("cache-control", "no-cache");
-                        request.AddHeader("content-type", "application/json");
-                        var response = client.Execute(request);
-                        var deserialize = new JsonDeserializer();
-                        var output = deserialize.Deserialize<Dictionary<string, string>>(response);
-                        var result = output["count"];
-                        Assert.AreEqual(int.Parse(result), planetsCount);
-                    }
-
-                            [Test]
-
-                            public void HardCodingHTTPie()
-                            {
-                                RestClient client = new RestClient("https://swapi.dev/api/planets/1");
-                                RestRequest request = new RestRequest(Method.GET);
-                                request.AddHeader("cache-control", "no-cache");
-                                request.AddHeader("content-type", "application/json");
-                                IRestResponse response = client.Execute(request);
-                                HttpStatusCode statusCode = response.StatusCode;
-                                int numericStatusCode = (int)statusCode;
-                            }*/
     }
 }

@@ -41,6 +41,42 @@ namespace UnitTestProject.Core.RestHelper
                 }
             }
 
+            internal JObject GetObj(IRestResponse response)
+            {
+                JObject output = JObject.Parse(response.Content);
+                return output;
+            }
+            internal IRestResponse GetReesponse(string endpoint)
+            {
+                string url = GetUrl(endpoint);
+                RestClient restClient = new RestClient(url);
+                RestRequest restRequest = new RestRequest(Method.GET);
+                restRequest.AddHeader("cache-control", "no-cache");
+                restRequest.AddHeader("content-type", "application/json");
+                IRestResponse response = restClient.Execute(restRequest);
+                return response;
+            }
+            internal int GetStatusCode(IRestResponse response)
+            {
+                HttpStatusCode statusCode = response.StatusCode;
+                int numericStatusCode = (int)statusCode;
+                return numericStatusCode;
+            }
+
+            internal string GetUrl(string endpoint)
+            {
+                if ((endpoint.IndexOf("http")) == 0)
+                {
+                    string url = endpoint;
+                    return url;
+                }
+                else
+                {
+                    string url = Path.Combine(baseUrl, endpoint);
+                    return url;
+                }
+            }
+
             public RestRequest CreateGetRequest()
             {
                 var restRequest = new RestRequest(Method.GET);
@@ -59,7 +95,6 @@ namespace UnitTestProject.Core.RestHelper
                 return restRequest;
             }
 
-
             public RestRequest CreatePostRequestToken()
             {
                 RestRequest restRequest = new RestRequest(Method.POST);
@@ -70,41 +105,7 @@ namespace UnitTestProject.Core.RestHelper
                 //restRequest.AddHeader("Authorization", "js2kgp");
                 return restRequest;
             }
-            public dynamic ObjectParse(RestClient client, RestRequest request, string name, string param)
-            {
-                var response = client.Execute(request);
-                JObject output = JObject.Parse(response.Content);
-                dynamic arg = output[name][0][param];
-                return arg;
-            }
 
-            public dynamic ObjectParseOne(RestClient client, RestRequest request, string name)
-            {
-                var response = client.Execute(request);
-                JObject output = JObject.Parse(response.Content);
-                dynamic arg = output[name];
-                return arg;
-            }
-
-            public dynamic DeSeriolizeObj(IRestResponse response)
-            {
-                var stream = response.Content;
-                dynamic vol = JObject.Parse(stream);
-                return vol;
-            }
-
-
-            public int GetStatusCode(IRestResponse response)
-            {
-                HttpStatusCode statusCode = response.StatusCode;
-                int numericStatusCode = (int)statusCode;
-                return numericStatusCode;
-            }
-            public dynamic GetResponse(RestClient client, RestRequest request)
-            {
-                var response = client.Execute(request);
-                return response;
-            }
         }
 
     }
