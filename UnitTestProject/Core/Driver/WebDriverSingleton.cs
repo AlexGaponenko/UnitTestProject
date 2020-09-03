@@ -1,47 +1,52 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
+using OpenQA.Selenium.Support.Events;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 
 namespace XUnitTestProject1.Core.Driver
 {
     internal class WebDriverSingleton
     {
+        private static readonly Lazy<WebDriverSingleton> lazy = new Lazy<WebDriverSingleton>(() => new WebDriverSingleton());
+        public static WebDriverSingleton instanse => lazy.Value;
+        private static IWebDriver driver;
+        public IWebDriver CurrentDriver => GetIWebDriver();
 
-        
-        public static IWebDriver driver;
-        
-        public static IWebDriver GetIWebDriver() 
+        public string GetPathDriver()
         {
-            {
-                if (driver == null)
-                    driver = new ChromeDriver(ChromeStart.OptionsChrome());
-                
-
-                return driver;
-            }
+            var currentDirectory = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory);
+            string projectDirectory = (currentDirectory.Parent.Parent.Parent.FullName + @"\\ChromeDriver");
+            return projectDirectory;
         }
-        //private static readonly Lazy<WebDriverSingleton> lazy = new Lazy<WebDriverSingleton>(() => new WebDriverSingleton());
-        //public static WebDriverSingleton instanse => lazy.Value;
 
-        //private IWebDriver driver;
+        public IWebDriver GetIWebDriver()
+        {
+            if (driver == null) { driver = new ChromeDriver(GetPathDriver(), ChromeStart.OptionsChrome()); }
+            return driver;
+        }
 
-        //public IWebDriver GetIWebDriver()
-        //{
-        //    if (driver == null)
-        //    {
-        //        driver = new ChromeDriver(ChromeStart.OptionsChrome());
-        //    }
-        //        return driver;
-
-        //}
         public void CloseBrowser()
         {
-
             driver.Quit();
             driver = null;
         }
+
+
+        //public static IWebDriver driver;
+
+        //public static IWebDriver GetIWebDriver() 
+        //{
+        //    {
+        //        if (driver == null)
+        //            driver = new ChromeDriver(ChromeStart.OptionsChrome());
+
+
+        //        return driver;
+        //    }
+        //}
     }
 }

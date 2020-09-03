@@ -16,10 +16,10 @@ namespace NUnitTestProject1.PageObject
             window.GoTo(url);
         }
 
-        public void ClearCookies()
-        {
-            driver.Manage().Cookies.DeleteAllCookies();
-        }
+        //public void ClearCookies()
+        //{
+        //    driver.Manage().Cookies.DeleteAllCookies();
+        //}
 
     }
 }

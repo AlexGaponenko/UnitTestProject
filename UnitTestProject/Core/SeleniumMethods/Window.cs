@@ -20,9 +20,9 @@ namespace XUnitTestProject1.Core.SeleniumMethods
             driver.Manage().Window.Maximize();
         }
 
-        public void ClearCookies()
-        {
-            driver.Manage().Cookies.DeleteAllCookies();
-        }
+        //public void ClearCookies()
+        //{
+        //    driver.Manage().Cookies.DeleteAllCookies();
+        //}
     }
 }

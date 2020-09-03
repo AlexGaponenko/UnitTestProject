@@ -11,7 +11,7 @@ namespace XUnitTestProject1.Core.SeleniumMethods
 {
     internal class Waiters : WebDriverSingleton
     {
-        public IWebDriver driver = GetIWebDriver();
+        protected IWebDriver driver = WebDriverSingleton.instanse.GetIWebDriver();
         public IWebElement GetElement(By locator)
         {
             DefaultWait<IWebDriver> wait = new DefaultWait<IWebDriver>(driver)

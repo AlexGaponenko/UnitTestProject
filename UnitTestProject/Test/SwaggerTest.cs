@@ -60,12 +60,12 @@ namespace UnitTestProject.Test
             IRestResponse checkUserAdd = swApiHelper.GetUser(apiUrl, "Ass");
             JObject parsFirstUser = restAPI2.GetObj(checkUserAdd);
             string firstUser = Convert.ToString(parsFirstUser["username"]);
-            //Assert.AreEqual("Tolya", firstUser);
-            //swApiHelper.DeleteUser(apiUrl, "Tolya");
-            //IRestResponse userDell = swApiHelper.GetUser(apiUrl, "Tolya");
-            //JObject parsFirstUserDell = restAPI2.GetObj(userDell);
-            //string firstUserDell = Convert.ToString(parsFirstUserDell["message"]);
-            //Assert.AreEqual(messageFounUser, firstUserDell);
+            Assert.AreEqual("Ass", firstUser);
+            swApiHelper.DeleteUser(apiUrl, "Ass");
+            IRestResponse userDell = swApiHelper.GetUser(apiUrl, "Ass");
+            JObject parsFirstUserDell = restAPI2.GetObj(userDell);
+            string firstUserDell = Convert.ToString(parsFirstUserDell["message"]);
+            Assert.AreEqual(messageFounUser, firstUserDell);
 
         }
         [Test]

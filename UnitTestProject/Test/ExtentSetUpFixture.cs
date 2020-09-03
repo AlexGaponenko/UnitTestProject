@@ -15,7 +15,7 @@ namespace NUnitTestProject1.Test
     {
         private Window window = new Window();
         private ExtentTest test;
-
+        public IWebDriver driver;
         [OneTimeSetUp]
         public void setUp()
         {
@@ -53,7 +53,7 @@ namespace NUnitTestProject1.Test
                     var testname = TestContext.CurrentContext.Test.Name;
                     var path = directory + $"\\{testname}.png";
 
-                    ((ITakesScreenshot)WebDriverSingleton.GetIWebDriver()).GetScreenshot().SaveAsFile(path);
+                    ((ITakesScreenshot)driver).GetScreenshot().SaveAsFile(path);
 
                     test.Log(logstatus, "Snapshot below: " + test.AddScreenCaptureFromPath(path));
                     break;

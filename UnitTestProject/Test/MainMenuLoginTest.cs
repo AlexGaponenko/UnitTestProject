@@ -37,7 +37,7 @@ namespace NUnitTestProject1
         [SetUp]
         public void OpenTest()
         {
-            homePage.ClearCookies();
+           
             homePage.openSite();
         }
 
