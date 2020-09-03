@@ -39,6 +39,16 @@ namespace UnitTestProject.Core.RestHelper
             IRestResponse restResponseUser = clientUser.Execute(requestUser);
             return restResponseUser;
         }
+        public IRestResponse GetUserPassword(string apiUrl)
+        {
+            RestClient clientUser = new RestClient(apiUrl);
+            RestRequest requestUser = new RestRequest("/user/login", Method.GET);
+            requestUser.AddHeader("username", "Vasya");
+            requestUser.AddHeader("password", "VasgenKrasava");
+            requestUser.AddHeader("accept", "application/json");
+            IRestResponse restResponseUser = clientUser.Execute(requestUser);
+            return restResponseUser;
+        }
 
         public IRestResponse CreatesUserList(string apiUrl, string name)
         {
