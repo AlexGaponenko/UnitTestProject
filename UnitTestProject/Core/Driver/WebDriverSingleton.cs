@@ -25,7 +25,7 @@ namespace XUnitTestProject1.Core.Driver
 
         public IWebDriver GetIWebDriver()
         {
-            if (driver == null) { driver = new ChromeDriver(GetPathDriver(), ChromeStart.OptionsChrome()); }
+            if (driver == null) { driver = new ChromeDriver(GetPathDriver(), ChromeStart.OptionsChrome(), TimeSpan.FromSeconds(15)); }
             return driver;
         }
 

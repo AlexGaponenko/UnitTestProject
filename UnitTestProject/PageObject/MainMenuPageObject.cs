@@ -30,9 +30,9 @@ namespace NewUnitProject.PajeObject
             button.click(_userButton);
         }
 
-        public bool waitMenu()
+        public string waitMenu()
         {
-           return button.WaitClicableElementDisplay(_siterules);
+           return button.WaitClicableElementDisplay(_siterules).Text;  
         }
 
         

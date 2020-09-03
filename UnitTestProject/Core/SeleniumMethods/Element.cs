@@ -9,7 +9,7 @@ namespace XUnitTestProject1.Core.SeleniumMethods
     {
         public string getText(By locator)
         {
-            return GetElement(locator).Text;
+            return WaitClicableElement(locator).Text;
         }
     }
 }

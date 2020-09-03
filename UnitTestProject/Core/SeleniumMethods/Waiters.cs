@@ -11,8 +11,10 @@ namespace XUnitTestProject1.Core.SeleniumMethods
 {
     internal class Waiters : WebDriverSingleton
     {
-        protected IWebDriver driver = WebDriverSingleton.instanse.GetIWebDriver();
-        public IWebElement GetElement(By locator)
+        
+        protected IWebDriver driver = instanse.GetIWebDriver();
+        [Obsolete]
+        public IWebElement GetElement(Func<IWebDriver, IWebElement> expectedCondition)
         {
             DefaultWait<IWebDriver> wait = new DefaultWait<IWebDriver>(driver)
             {
@@ -20,28 +22,18 @@ namespace XUnitTestProject1.Core.SeleniumMethods
                 PollingInterval = TimeSpan.FromMilliseconds(500)
             };
             wait.IgnoreExceptionTypes(typeof(NoSuchElementException));
-            return wait.Until<IWebElement>(driver => driver.FindElement(locator));
+            wait.IgnoreExceptionTypes(typeof(InvalidSelectorException));
+            return wait.Until(expectedCondition);
         }
 
+        [Obsolete]
         public IWebElement WaitClicableElement(By locator)
         {
-            var wait = new DefaultWait<IWebDriver>(driver)
-            {
-                Timeout = TimeSpan.FromSeconds(15),
-                PollingInterval = TimeSpan.FromMilliseconds(500)
-            };
-            wait.IgnoreExceptionTypes(typeof(NoSuchElementException));
-            return wait.Until(ExpectedConditions.ElementToBeClickable(locator));
+            return GetElement(ExpectedConditions.ElementToBeClickable(locator));
         }
-        public bool WaitClicableElementDisplay(By locator)
+        public IWebElement WaitClicableElementDisplay(By locator)
         {
-            var wait = new DefaultWait<IWebDriver>(driver)
-            {
-                Timeout = TimeSpan.FromSeconds(15),
-                PollingInterval = TimeSpan.FromMilliseconds(500)
-            };
-            wait.IgnoreExceptionTypes(typeof(NoSuchElementException));
-            return wait.Until(ExpectedConditions.ElementToBeClickable(locator)).Displayed;
+            return GetElement(ExpectedConditions.ElementIsVisible(locator));
         }
 
         public void WaitForAjax()
@@ -52,6 +44,7 @@ namespace XUnitTestProject1.Core.SeleniumMethods
                 PollingInterval = TimeSpan.FromMilliseconds(500)
             };
             wait.IgnoreExceptionTypes(typeof(NoSuchElementException));
+            wait.IgnoreExceptionTypes(typeof(InvalidSelectorException));
             wait.Until(d => (bool)((IJavaScriptExecutor)d).ExecuteScript("return jQuery.active == 0"));
         }
     }

@@ -37,7 +37,6 @@ namespace NUnitTestProject1
         [SetUp]
         public void OpenTest()
         {
-           
             homePage.openSite();
         }
 
@@ -47,12 +46,10 @@ namespace NUnitTestProject1
             mainMenu.openLoginMenu();
             authPage.TypeText(_loginRight, _passwordRight);
             mainMenu.clicProfileButton();
-            Assert.True(mainMenu.waitMenu());
+            Assert.AreEqual(mainMenu.waitMenu(), "Пользовательское соглашение");
             mainMenu.clicUserButton();
             Assert.AreEqual(_userId, userAcc.userIdSherch());
-            
-
-        }
+            }
 
         [Test]
         public void Test2()
