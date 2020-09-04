@@ -1,17 +1,8 @@
-﻿using MongoDB.Bson.IO;
-using RestSharp;
-using System;
-using System.Collections.Generic;
+﻿using RestSharp;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web.UI.WebControls;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Net;
-using RestSharp.Serialization.Json;
-using Microsoft.Extensions.Primitives;
+
 
 namespace UnitTestProject.Core.RestHelper
 {

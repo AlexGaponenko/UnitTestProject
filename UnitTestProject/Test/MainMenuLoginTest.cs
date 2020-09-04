@@ -5,6 +5,7 @@ using NUnit.Framework.Interfaces;
 using NUnitTestProject1.PageObject;
 using NUnitTestProject1.Test;
 using OpenQA.Selenium;
+using UnitTestProject.PageObject;
 using XUnitTestProject1.Core.Driver;
 using XUnitTestProject1.Core.Reports;
 
@@ -17,6 +18,7 @@ namespace NUnitTestProject1
         private AuthorizationPajeObject authPage;
         private UserAccountPageObject userAcc;
         private HomePage homePage;
+        private CatalogPageObject catalog;
         private ExtentTest test;
 
         private string _loginRight = "Mytestmail92@tut.by";
@@ -41,7 +43,7 @@ namespace NUnitTestProject1
         }
 
         [Test]
-            public void Test1()
+        public void Test1()
         {
             mainMenu.openLoginMenu();
             authPage.TypeText(_loginRight, _passwordRight);
@@ -49,7 +51,7 @@ namespace NUnitTestProject1
             Assert.AreEqual(mainMenu.waitMenu(), "Пользовательское соглашение");
             mainMenu.clicUserButton();
             Assert.AreEqual(_userId, userAcc.userIdSherch());
-            }
+        }
 
         [Test]
         public void Test2()
@@ -60,5 +62,13 @@ namespace NUnitTestProject1
             authPage.messageIdentefication();
             Assert.AreEqual(_messegeWrongLoginOrPassword, authPage.messageIdentefication());
         }
+        [Test]
+        //public void Test3()
+        //{
+        //    homePage.openSite();
+        //    mainMenu.clicCatalog();
+        //    catalog.getCatalogObject();
+        //}
+
     }
 }
