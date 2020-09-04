@@ -25,7 +25,18 @@ namespace XUnitTestProject1.Core.SeleniumMethods
             wait.IgnoreExceptionTypes(typeof(InvalidSelectorException));
             return wait.Until(expectedCondition);
         }
-
+        public IList<IWebElement> GetWebElements(By selector)
+        {
+            DefaultWait<IWebDriver> wait = new DefaultWait<IWebDriver>(driver)
+            {
+                Timeout = TimeSpan.FromSeconds(30),
+                PollingInterval = TimeSpan.FromMilliseconds(500)
+            };
+            wait.IgnoreExceptionTypes(typeof(NoSuchElementException));
+            wait.IgnoreExceptionTypes(typeof(StaleElementReferenceException));
+            wait.Until(ExpectedConditions.ElementExists(selector));
+            return driver.FindElements(selector);
+        }
         [Obsolete]
         public IWebElement WaitClicableElement(By locator)
         {

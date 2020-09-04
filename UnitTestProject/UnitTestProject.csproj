@@ -144,12 +144,13 @@
     <Compile Include="Core\Reports\ExtentTestManager.cs" />
     <Compile Include="Core\RestHelper\RestAPIHelper.cs" />
     <Compile Include="Core\RestHelper\SwaggerApiHelper.cs" />
-    <Compile Include="Core\SeleniumMethods\Button.cs" />
+    <Compile Include="Core\SeleniumMethods\ButtonOne.cs" />
     <Compile Include="Core\SeleniumMethods\Element.cs" />
     <Compile Include="Core\SeleniumMethods\Elements.cs" />
     <Compile Include="Core\SeleniumMethods\Waiters.cs" />
     <Compile Include="Core\SeleniumMethods\Window.cs" />
     <Compile Include="PageObject\AuthorizationPajeObject.cs" />
+    <Compile Include="PageObject\CatalogPageObject.cs" />
     <Compile Include="PageObject\HomePage.cs" />
     <Compile Include="PageObject\MainMenuPageObject.cs" />
     <Compile Include="PageObject\SwapiPlanets.cs" />

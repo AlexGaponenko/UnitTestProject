@@ -14,8 +14,6 @@ namespace XUnitTestProject1.Core.Driver
         private static readonly Lazy<WebDriverSingleton> lazy = new Lazy<WebDriverSingleton>(() => new WebDriverSingleton());
         public static WebDriverSingleton instanse => lazy.Value;
         private static IWebDriver driver;
-        public IWebDriver CurrentDriver => GetIWebDriver();
-
         public string GetPathDriver()
         {
             var currentDirectory = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory);

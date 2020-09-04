@@ -12,7 +12,7 @@ namespace NewUnitProject.PajeObject
         private readonly By _notAuthMessage = By.CssSelector("div[class$=auth-form__line_condensed] div[class^=auth-form__description]");
 
         private Elements textField = new Elements();
-        private Button button = new Button();
+        private ButtonOne button = new ButtonOne();
         private Element textName = new Element();
 
 
