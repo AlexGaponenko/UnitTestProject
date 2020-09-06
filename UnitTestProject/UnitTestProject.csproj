@@ -139,6 +139,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Core\Driver\ChromeStart.cs" />
+    <Compile Include="Core\Driver\EvenWaiterListners.cs" />
     <Compile Include="Core\Driver\WebDriverSingleton.cs" />
     <Compile Include="Core\Reports\ExtentService.cs" />
     <Compile Include="Core\Reports\ExtentTestManager.cs" />

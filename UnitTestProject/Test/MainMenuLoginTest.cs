@@ -6,8 +6,8 @@ using NUnitTestProject1.PageObject;
 using NUnitTestProject1.Test;
 using OpenQA.Selenium;
 using UnitTestProject.PageObject;
-using XUnitTestProject1.Core.Driver;
-using XUnitTestProject1.Core.Reports;
+using UnitTestProject.Core.Driver;
+using UnitTestProject.Core.Reports;
 
 namespace NUnitTestProject1
 {
@@ -62,13 +62,13 @@ namespace NUnitTestProject1
             authPage.messageIdentefication();
             Assert.AreEqual(_messegeWrongLoginOrPassword, authPage.messageIdentefication());
         }
-        [Test]
+        //[Test]
         //public void Test3()
         //{
         //    homePage.openSite();
         //    mainMenu.clicCatalog();
         //    catalog.getCatalogObject();
         //}
-
+    
     }
 }

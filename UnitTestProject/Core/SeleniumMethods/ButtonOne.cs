@@ -3,7 +3,7 @@ using System.Linq;
 using OpenQA.Selenium;
 
 
-namespace XUnitTestProject1.Core.SeleniumMethods
+namespace UnitTestProject.Core.SeleniumMethods
 {
     internal class ButtonOne : Waiters
     {

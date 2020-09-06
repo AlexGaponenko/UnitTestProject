@@ -5,9 +5,9 @@ using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using XUnitTestProject1.Core.Driver;
-using XUnitTestProject1.Core.Reports;
-using XUnitTestProject1.Core.SeleniumMethods;
+using UnitTestProject.Core.Driver;
+using UnitTestProject.Core.Reports;
+using UnitTestProject.Core.SeleniumMethods;
 
 namespace NUnitTestProject1.Test
 {

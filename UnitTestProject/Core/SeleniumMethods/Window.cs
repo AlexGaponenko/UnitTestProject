@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace XUnitTestProject1.Core.SeleniumMethods
+namespace UnitTestProject.Core.SeleniumMethods
 {
     internal class Window : Waiters
 
@@ -20,9 +20,13 @@ namespace XUnitTestProject1.Core.SeleniumMethods
             driver.Manage().Window.Maximize();
         }
 
-        //public void ClearCookies()
-        //{
-        //    driver.Manage().Cookies.DeleteAllCookies();
-        //}
+        public void CloseBrowser()
+        {
+            driver.Dispose();
+        }
+        public void ClearCookies()
+        {
+            driver.Manage().Cookies.DeleteAllCookies();
+        }
     }
 }

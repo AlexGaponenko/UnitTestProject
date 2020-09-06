@@ -1,5 +1,5 @@
 ﻿using OpenQA.Selenium.Chrome;
-namespace XUnitTestProject1.Core.Driver
+namespace UnitTestProject.Core.Driver
 {
     internal class ChromeStart
     {
@@ -10,6 +10,8 @@ namespace XUnitTestProject1.Core.Driver
             optionsCh.AddArguments("--lang=en-GB");
             return optionsCh;
         }
+
+
 
         //public static ChromeOptions OptionsChrome()
         //{

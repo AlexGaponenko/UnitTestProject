@@ -2,18 +2,15 @@
 using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
-using System.Text;
-using XUnitTestProject1.Core.Driver;
+using UnitTestProject.Core.Driver;
 
-
-
-namespace XUnitTestProject1.Core.SeleniumMethods
+namespace UnitTestProject.Core.SeleniumMethods
 {
-    internal class Waiters : WebDriverSingleton
+    internal class Waiters 
     {
         
-        protected IWebDriver driver = instanse.GetIWebDriver();
-        [Obsolete]
+        protected IWebDriver driver = WebDriverSingleton.instanse.GetIWebDriver();
+      
         public IWebElement GetElement(Func<IWebDriver, IWebElement> expectedCondition)
         {
             DefaultWait<IWebDriver> wait = new DefaultWait<IWebDriver>(driver)
@@ -25,6 +22,8 @@ namespace XUnitTestProject1.Core.SeleniumMethods
             wait.IgnoreExceptionTypes(typeof(InvalidSelectorException));
             return wait.Until(expectedCondition);
         }
+
+        
         public IList<IWebElement> GetWebElements(By selector)
         {
             DefaultWait<IWebDriver> wait = new DefaultWait<IWebDriver>(driver)
@@ -54,9 +53,16 @@ namespace XUnitTestProject1.Core.SeleniumMethods
                 Timeout = TimeSpan.FromSeconds(15),
                 PollingInterval = TimeSpan.FromMilliseconds(500)
             };
-            wait.IgnoreExceptionTypes(typeof(NoSuchElementException));
-            wait.IgnoreExceptionTypes(typeof(InvalidSelectorException));
             wait.Until(d => (bool)((IJavaScriptExecutor)d).ExecuteScript("return jQuery.active == 0"));
+        }
+        public void Destroy()
+        {
+            if (driver == null) return;
+            else
+            {
+                driver.Quit();
+                driver = null;
+            }
         }
     }
 

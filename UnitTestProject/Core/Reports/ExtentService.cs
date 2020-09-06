@@ -9,7 +9,7 @@ using AventStack.ExtentReports.Reporter.Configuration;
 using Microsoft.AspNetCore.Http;
 using static System.Net.Mime.MediaTypeNames;
 
-namespace XUnitTestProject1.Core.Reports
+namespace UnitTestProject.Core.Reports
 {
     public class ExtentService
     {

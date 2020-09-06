@@ -1,6 +1,6 @@
 ﻿using OpenQA.Selenium;
 using System.Threading;
-using XUnitTestProject1.Core.SeleniumMethods;
+using UnitTestProject.Core.SeleniumMethods;
 
 namespace NewUnitProject.PajeObject
 {

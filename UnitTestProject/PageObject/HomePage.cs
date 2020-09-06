@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Security.Policy;
 using System.Text;
-using XUnitTestProject1.Core.SeleniumMethods;
+using UnitTestProject.Core.SeleniumMethods;
 
 namespace NUnitTestProject1.PageObject
 {

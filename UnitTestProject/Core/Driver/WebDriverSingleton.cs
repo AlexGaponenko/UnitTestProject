@@ -1,35 +1,41 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Support.Events;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Text;
 
-namespace XUnitTestProject1.Core.Driver
+namespace UnitTestProject.Core.Driver
 {
     internal class WebDriverSingleton
     {
         private static readonly Lazy<WebDriverSingleton> lazy = new Lazy<WebDriverSingleton>(() => new WebDriverSingleton());
         public static WebDriverSingleton instanse => lazy.Value;
+        public IWebDriver WrapperEventDriver => GetIWebDriver();
         private static IWebDriver driver;
-        public string GetPathDriver()
+        private string GetPathDriver()
         {
             var currentDirectory = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory);
             string projectDirectory = (currentDirectory.Parent.Parent.Parent.FullName + @"\\ChromeDriver");
             return projectDirectory;
         }
+        private ChromeDriverService DriverService()
+        {
+            ChromeDriverService service = ChromeDriverService.CreateDefaultService(GetPathDriver(), "chromedriver.exe");
+            return service;
+        }
 
         public IWebDriver GetIWebDriver()
         {
-            if (driver == null) { driver = new ChromeDriver(GetPathDriver(), ChromeStart.OptionsChrome(), TimeSpan.FromSeconds(15)); }
-            return driver;
+            if (driver == null) { driver = new ChromeDriver(DriverService(), ChromeStart.OptionsChrome(), TimeSpan.FromSeconds(15)); }
+            EventFiringWebDriver eventFiringWebDriver = new EventFiringWebDriver(driver);
+            EvenWaiterListners evenWaiterListners = new EvenWaiterListners();
+            evenWaiterListners.StartListen(eventFiringWebDriver);
+            return eventFiringWebDriver;
         }
 
         public void CloseBrowser()
         {
-            driver.Quit();
+            WrapperEventDriver.Quit();
             driver = null;
         }
 

@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace XUnitTestProject1.Core.SeleniumMethods
+namespace UnitTestProject.Core.SeleniumMethods
 {
     class Element : Waiters
     {

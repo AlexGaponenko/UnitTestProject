@@ -1,5 +1,5 @@
 ﻿using OpenQA.Selenium;
-using XUnitTestProject1.Core.SeleniumMethods;
+using UnitTestProject.Core.SeleniumMethods;
 
 namespace NewUnitProject.PajeObject
 {
