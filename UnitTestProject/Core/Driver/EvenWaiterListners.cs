@@ -1,8 +1,10 @@
 ﻿using AventStack.ExtentReports;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.Events;
+using OpenQA.Selenium.Support.UI;
 using System;
 using System.Diagnostics;
+using UnitTestProject.Core.SeleniumMethods;
 
 namespace UnitTestProject.Core.Driver
 {
@@ -10,7 +12,7 @@ namespace UnitTestProject.Core.Driver
     {
         private IWebDriver _driver => WebDriverSingleton.instanse.WrapperEventDriver;
         private readonly Stopwatch Watch = new Stopwatch();
-
+        JsExecuter jsExecuter = new JsExecuter();
         public void StartListen(EventFiringWebDriver eventFiringWebDriver)
         {
             eventFiringWebDriver.ElementClicked += ElementClicking;
@@ -24,17 +26,18 @@ namespace UnitTestProject.Core.Driver
 
         private void FindElement(object sender, FindElementEventArgs e)
         {
+
             Console.WriteLine("FindElement");
         }
 
         private void Navigatin(object sender, WebDriverNavigationEventArgs e)
         {
-            Console.WriteLine("Navigatin");
+            Console.WriteLine("Navigatin" + " " + e.Url);
         }
 
         private void Navigated(object sender, WebDriverNavigationEventArgs e)
         {
-            Console.WriteLine("Navigated");
+            Console.WriteLine("Navigated" + " " + e.Url);
         }
 
         private void ElementValueChanging(object sender, WebElementValueEventArgs e)
@@ -49,12 +52,13 @@ namespace UnitTestProject.Core.Driver
 
         private void ElementClicked(object sender, WebElementEventArgs e)
         {
-            Console.WriteLine("ElementClicked");
+            Console.WriteLine("ElementClicked " + e.Element.Text);
         }
 
         private void ElementClicking(object sender, WebElementEventArgs e)
         {
             Console.WriteLine("ElementClicking");
         }
+
     }
 }

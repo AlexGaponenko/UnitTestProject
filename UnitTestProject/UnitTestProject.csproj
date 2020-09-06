@@ -148,6 +148,7 @@
     <Compile Include="Core\SeleniumMethods\ButtonOne.cs" />
     <Compile Include="Core\SeleniumMethods\Element.cs" />
     <Compile Include="Core\SeleniumMethods\Elements.cs" />
+    <Compile Include="Core\SeleniumMethods\JsExecuter.cs" />
     <Compile Include="Core\SeleniumMethods\Waiters.cs" />
     <Compile Include="Core\SeleniumMethods\Window.cs" />
     <Compile Include="PageObject\AuthorizationPajeObject.cs" />
