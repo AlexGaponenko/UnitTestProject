@@ -2,7 +2,6 @@
 using System.Web.UI.WebControls;
 using UnitTestProject.Core.SeleniumMethods;
 
-
 namespace NewUnitProject.PajeObject
 {
     public class MainMenuPageObject 

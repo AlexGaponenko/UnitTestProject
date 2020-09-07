@@ -12,7 +12,9 @@ namespace UnitTestProject.Core.Driver
         public static WebDriverSingleton instanse => lazy.Value;
         public IWebDriver WrapperEventDriver => GetIWebDriver();
         private static IWebDriver driver;
-        private string GetPathDriver()
+        public IWebDriver CurrentDriver => GetIWebDriver();
+
+        public string GetPathDriver()
         {
             var currentDirectory = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory);
             string projectDirectory = (currentDirectory.Parent.Parent.Parent.FullName + @"\\ChromeDriver");
@@ -24,7 +26,7 @@ namespace UnitTestProject.Core.Driver
             return service;
         }
 
-        public IWebDriver GetIWebDriver()
+        public IWebDriver GetIWebElement()
         {
             if (driver == null) { driver = new ChromeDriver(DriverService(), ChromeStart.OptionsChrome(), TimeSpan.FromSeconds(15)); }
             EventFiringWebDriver eventFiringWebDriver = new EventFiringWebDriver(driver);

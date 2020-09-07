@@ -145,8 +145,7 @@
     <Compile Include="Core\Reports\ExtentTestManager.cs" />
     <Compile Include="Core\RestHelper\RestAPIHelper.cs" />
     <Compile Include="Core\RestHelper\SwaggerApiHelper.cs" />
-    <Compile Include="Core\RestHelper\UserBuilder.cs" />
-    <Compile Include="Core\SeleniumMethods\ButtonOne.cs" />
+    <Compile Include="Core\SeleniumMethods\Button.cs" />
     <Compile Include="Core\SeleniumMethods\Element.cs" />
     <Compile Include="Core\SeleniumMethods\Elements.cs" />
     <Compile Include="Core\SeleniumMethods\JsExecuter.cs" />

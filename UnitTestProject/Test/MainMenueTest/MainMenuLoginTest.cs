@@ -62,13 +62,5 @@ namespace NUnitTestProject1
             authPage.messageIdentefication();
             Assert.AreEqual(_messegeWrongLoginOrPassword, authPage.messageIdentefication());
         }
-
-        //public void Test3()
-        //{
-        //    homePage.openSite();
-        //    mainMenu.clicCatalog();
-        //    catalog.getCatalogObject();
-        //}
-    
     }
 }
