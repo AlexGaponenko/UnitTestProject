@@ -10,9 +10,9 @@ namespace UnitTestProject.Core.Driver
     {
         private static readonly Lazy<WebDriverSingleton> lazy = new Lazy<WebDriverSingleton>(() => new WebDriverSingleton());
         public static WebDriverSingleton instanse => lazy.Value;
-        public IWebDriver WrapperEventDriver => GetIWebDriver();
+        public IWebDriver WrapperEventDriver => GetIWebElement();
         private static IWebDriver driver;
-        public IWebDriver CurrentDriver => GetIWebDriver();
+
 
         public string GetPathDriver()
         {

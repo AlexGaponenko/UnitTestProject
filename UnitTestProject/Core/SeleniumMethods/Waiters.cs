@@ -9,7 +9,7 @@ namespace UnitTestProject.Core.SeleniumMethods
     internal class Waiters 
     {
         
-        protected IWebDriver driver = instanse.GetIWebDriver();
+        protected IWebDriver driver = WebDriverSingleton.instanse.GetIWebElement();
         [Obsolete]
         public IWebElement GetElement(Func<IWebDriver, IWebElement> expectedCondition)
         {
