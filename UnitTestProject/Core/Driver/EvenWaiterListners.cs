@@ -10,9 +10,9 @@ namespace UnitTestProject.Core.Driver
 {
     public class EvenWaiterListners
     {
-        private IWebDriver _driver => WebDriverSingleton.instanse.WrapperEventDriver;
+        private IWebDriver driver => WebDriverSingleton.instanse.WrapperEventDriver;
         private readonly Stopwatch Watch = new Stopwatch();
-        JsExecuter jsExecuter = new JsExecuter();
+        
         public void StartListen(EventFiringWebDriver eventFiringWebDriver)
         {
             eventFiringWebDriver.ElementClicked += ElementClicking;
@@ -26,8 +26,9 @@ namespace UnitTestProject.Core.Driver
 
         private void FindElement(object sender, FindElementEventArgs e)
         {
-
-            Console.WriteLine("FindElement");
+            CloseJS();
+            WaitForAjax();
+            Console.WriteLine("FindElement"); 
         }
 
         private void Navigatin(object sender, WebDriverNavigationEventArgs e)
@@ -38,6 +39,7 @@ namespace UnitTestProject.Core.Driver
         private void Navigated(object sender, WebDriverNavigationEventArgs e)
         {
             Console.WriteLine("Navigated" + " " + e.Url);
+            Watch.Stop();
         }
 
         private void ElementValueChanging(object sender, WebElementValueEventArgs e)
@@ -52,13 +54,34 @@ namespace UnitTestProject.Core.Driver
 
         private void ElementClicked(object sender, WebElementEventArgs e)
         {
+            CloseJS();
+            WaitForAjax();
             Console.WriteLine("ElementClicked " + e.Element.Text);
         }
 
         private void ElementClicking(object sender, WebElementEventArgs e)
         {
+            CloseJS();
+            WaitForAjax();
             Console.WriteLine("ElementClicking");
         }
+
+        public void WaitForAjax()
+        {
+            var wait = new DefaultWait<IWebDriver>(driver)
+            {
+                Timeout = TimeSpan.FromSeconds(15),
+                PollingInterval = TimeSpan.FromMilliseconds(500)
+            };
+            wait.Until(d => (bool)((IJavaScriptExecutor)d).ExecuteScript("return jQuery.active == 0"));
+        }
+
+        public void CloseJS()
+        {
+            JsExecuter js = new JsExecuter();
+            js.CloseJsAlert();
+        }
+
 
     }
 }

@@ -4,10 +4,8 @@ using NUnit.Framework;
 using NUnit.Framework.Interfaces;
 using NUnitTestProject1.PageObject;
 using NUnitTestProject1.Test;
-using OpenQA.Selenium;
 using UnitTestProject.PageObject;
-using UnitTestProject.Core.Driver;
-using UnitTestProject.Core.Reports;
+using UnitTestProject.Test.MainMenueTest;
 
 namespace NUnitTestProject1
 {
@@ -21,12 +19,14 @@ namespace NUnitTestProject1
         private CatalogPageObject catalog;
         private ExtentTest test;
 
-        private string _loginRight = "Mytestmail92@tut.by";
-        private string _passwordRight = "B00lIBN48";
-        private string _userId = "3078328";
-        private string _loginNotRight = "VitalMartal@mail.ru";
-        private string _passwordNotRight = "12345678";
-        private string _messegeWrongLoginOrPassword = "Неверный логин или пароль";
+        public static readonly string _loginRight = "Mytestmail92@tut.by";
+        public static readonly string _passwordRight = "B00lIBN48";
+        public static readonly string _userId = "3078328";
+        public static readonly string _loginNotRight = "VitalMartal@mail.ru";
+        public static readonly string _passwordNotRight = "12345678";
+        public static readonly string _messegeWrongLoginOrPassword = "Неверный логин или пароль";
+
+
         [OneTimeSetUp]
         public void Setup()
         {
@@ -46,7 +46,7 @@ namespace NUnitTestProject1
         public void Test1()
         {
             mainMenu.openLoginMenu();
-            authPage.TypeText(_loginRight, _passwordRight);
+            authPage.TypeText(_loginRight,_passwordRight);
             mainMenu.clicProfileButton();
             Assert.AreEqual(mainMenu.waitMenu(), "Пользовательское соглашение");
             mainMenu.clicUserButton();

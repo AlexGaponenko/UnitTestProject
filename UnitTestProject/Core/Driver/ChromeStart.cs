@@ -11,16 +11,14 @@ namespace UnitTestProject.Core.Driver
             return optionsCh;
         }
 
+        public static ChromeOptions OptionsChromeHedless()
+        {
+            ChromeOptions options = new ChromeOptions();
 
-
-        //public static ChromeOptions OptionsChrome()
-        //{
-        //    ChromeOptions options = new ChromeOptions();
-
-        //    options.AddArguments("--headless");
-        //    options.AddArguments("window-size=1800x900");
-        //    return options;
-        //}
+            options.AddArguments("--headless");
+            options.AddArguments("window-size=1800x900");
+            return options;
+        }
 
 
 

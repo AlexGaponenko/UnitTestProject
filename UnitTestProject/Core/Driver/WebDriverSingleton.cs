@@ -18,7 +18,7 @@ namespace UnitTestProject.Core.Driver
             string projectDirectory = (currentDirectory.Parent.Parent.Parent.FullName + @"\\ChromeDriver");
             return projectDirectory;
         }
-        private ChromeDriverService DriverService()
+        public ChromeDriverService DriverService()
         {
             ChromeDriverService service = ChromeDriverService.CreateDefaultService(GetPathDriver(), "chromedriver.exe");
             return service;
@@ -47,8 +47,6 @@ namespace UnitTestProject.Core.Driver
         //    {
         //        if (driver == null)
         //            driver = new ChromeDriver(ChromeStart.OptionsChrome());
-
-
         //        return driver;
         //    }
         //}

@@ -145,6 +145,7 @@
     <Compile Include="Core\Reports\ExtentTestManager.cs" />
     <Compile Include="Core\RestHelper\RestAPIHelper.cs" />
     <Compile Include="Core\RestHelper\SwaggerApiHelper.cs" />
+    <Compile Include="Core\RestHelper\UserBuilder.cs" />
     <Compile Include="Core\SeleniumMethods\ButtonOne.cs" />
     <Compile Include="Core\SeleniumMethods\Element.cs" />
     <Compile Include="Core\SeleniumMethods\Elements.cs" />
@@ -159,7 +160,7 @@
     <Compile Include="PageObject\UserAcountPageObject.cs" />
     <Compile Include="Test\APItest.cs" />
     <Compile Include="Test\ExtentSetUpFixture.cs" />
-    <Compile Include="Test\MainMenuLoginTest.cs" />
+    <Compile Include="Test\MainMenueTest\MainMenuLoginTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Test\SwaggerTest.cs" />
   </ItemGroup>

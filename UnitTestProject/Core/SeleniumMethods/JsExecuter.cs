@@ -6,21 +6,19 @@ namespace UnitTestProject.Core.SeleniumMethods
 {
     class JsExecuter : Waiters
     {
-        //IJavaScriptExecutor js;
+        IJavaScriptExecutor js;
 
-        //public JsExecuter()
-        //{
-        //    js = (IJavaScriptExecutor)driver;
-        //}
-        //public void CloseJsAlert()
-        //{
-        //    if (js != null)
-        //    {
-        //        var wait = new DefaultWait<IWebDriver>(driver);
-        //        wait.Until(ExpectedConditions.AlertIsPresent());
-        //        IAlert alert = driver.SwitchTo().Alert();
-        //        alert.Dismiss();
-        //    }
-        //}
+        public JsExecuter()
+        {
+            js = (IJavaScriptExecutor)driver;
+        }
+        public void CloseJsAlert()
+        {
+            if (js != null)
+            {   
+                js.ExecuteScript("window.alert = function(){}");
+                js.ExecuteScript("window.confirm = function(){return true;}");
+            }
+        }
     }
 }
