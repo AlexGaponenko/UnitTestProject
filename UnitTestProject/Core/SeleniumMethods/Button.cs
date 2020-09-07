@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace UnitTestProject.Core.SeleniumMethods
 {
-    internal class Button : Waiters
+     class Button : Waiters
     {
         public void click(By locator)
     {

@@ -5,7 +5,6 @@ using NUnit.Framework.Interfaces;
 using NUnitTestProject1.PageObject;
 using NUnitTestProject1.Test;
 using UnitTestProject.PageObject;
-using UnitTestProject.Test.MainMenueTest;
 
 namespace NUnitTestProject1
 {
@@ -16,7 +15,6 @@ namespace NUnitTestProject1
         private AuthorizationPajeObject authPage;
         private UserAccountPageObject userAcc;
         private HomePage homePage;
-        private CatalogPageObject catalog;
         private ExtentTest test;
 
         public static readonly string _loginRight = "Mytestmail92@tut.by";

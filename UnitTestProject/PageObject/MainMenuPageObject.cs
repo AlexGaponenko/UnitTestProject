@@ -1,5 +1,4 @@
 ﻿using OpenQA.Selenium;
-using System.Web.UI.WebControls;
 using UnitTestProject.Core.SeleniumMethods;
 
 namespace NewUnitProject.PajeObject
@@ -13,7 +12,7 @@ namespace NewUnitProject.PajeObject
         private readonly By _catalog = By.XPath("//ul[@class='b-main-navigation']//span[contains(text(),'Каталог')]");
         //private readonly By _userButton = By.CssSelector("div.b-top-profile__name a[class^=b-top-profile__link]");
 
-        private ButtonOne button = new ButtonOne();
+        private readonly Button button = new Button();
 
         public void openLoginMenu()
         {
